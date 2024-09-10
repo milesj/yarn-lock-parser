@@ -424,6 +424,17 @@ mod tests {
     }
 
     #[test]
+    fn parse_bun_failure_cases() {
+        let content = std::fs::read_to_string("tests/bun_cases/tarball_dep.lock").unwrap();
+        let res = parse(&content);
+
+        dbg!(&res);
+
+        assert!(res.is_ok());
+        assert_eq!(res.unwrap().1.len(), 1631);
+    }
+
+    #[test]
     fn parse_v1_extra_end_line_from_file_works() {
         let content = std::fs::read_to_string("tests/v1_extra_end_line/yarn.lock").unwrap();
         let res = parse(&content).unwrap();
